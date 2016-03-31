@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Personal Task Manager</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDOmj5IUQnHCwXYlkkaeEahGpqZiRWc0iw&sensor=false"></script>
+  </head>
+  <body ng-app="uniApp">
+	<div class="container" ng-controller="appController">
+		<div class="row">
+			<div class="">
+				<div ng-show="progressScreen" class="flw text-center">
+					<img class="progress" src="images/progress.gif"/>
+					<h4>Loading...</h4>
+				</div>
+				<div ng-show="mapScreen1" class="mapScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backMapGen1()"></span>Map Location</div>
+					<img src="images/map.jpg"/>
+				</div>
+				<div ng-show="mapScreen2" class="mapScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backMapGen2()"></span>Map Location</div>
+					<img src="images/map.jpg"/>
+				</div>
+				<div ng-show="mapScreen3" class="mapScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backMapGen3()"></span>Map Location</div>
+					<img src="images/map.jpg"/>
+				</div>
+				<form ng-show="signinScreen" class="form-horizontal">
+					<div class="app-header">Login</div>
+					<div class="col-md-12">
+						<div class="form-group text-center">
+							<h3>University of Scotland</h3>
+						</div>
+					  <div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">User Name</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="inputEmail3" placeholder="User Name">
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+						<div class="col-sm-10">
+						  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+						</div>
+					  </div>
+					  <div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+						  <button type="submit" class="btn btn-success" ng-click="signin()">Create Login</button>
+						</div>
+					  </div>
+					</div>
+				</form>
+				<form ng-show="initialSetup" class="form-horizontal">
+					<div class="app-header">Initial Setup</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="col-sm-12">
+							  <select class="form-control">
+								<option>Select University</option>
+								<option>unversity A</option>
+								<option>unversity B</option>
+								<option>unversity C</option>
+							  </select>
+							</div>
+						  </div>
+						  <div class="form-group">
+							<div class="col-sm-12">
+							  <select class="form-control">
+								<option>Select Year</option>
+								<option>2016</option>
+								<option>2017</option>
+								<option>2018</option>
+							  </select>
+							</div>
+						  </div>
+						  <div class="form-group">
+							<div class="col-sm-12">
+							  <select class="form-control">
+								<option>Select Course</option>
+								<option>CSE</option>
+								<option>ECE</option>
+							  </select>
+							</div>
+						  </div>
+						  <div class="form-group">
+							<div class="col-sm-12">
+							  <button type="submit" class="btn btn-success" ng-click="updateInit()">Update</button>
+							</div>
+						  </div>
+						</div>
+				</form>
+				<div ng-show="categoryList" class="">
+					<div class="app-header">Home</div>
+					<ul class="form-horizontal timeTableList col-md-12">
+						<li>
+							<a href="#" ng-click="timeTableLists()">Time Table</a>
+						</li>
+						<li>
+							<a href="#" ng-click="classList()">Class</a>
+						</li>
+						<li>
+							<a href="#" ng-click="results()">Reults</a>
+						</li>
+					</ul>
+				</div>
+				<div  ng-show="timeTableList">
+					<div class="app-header"><span class="back-btn" ng-click="homeScreen()"></span>Time Table List</div>
+					<ul class="form-horizontal col-md-12 timeTableList">
+						<li>
+							<a href="#" ng-click="timeTableDetail()"><span class="pull-left">Week 1</span> <span class="pull-right">01/01/16 - 08/01/16</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="timeTableDetail()"><span class="pull-left">Week 2</span> <span class="pull-right">09/01/16 - 16/01/16</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="timeTableDetail()"><span class="pull-left">Week 3</span> <span class="pull-right">17/01/16 - 24/01/16</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="timeTableDetail()"><span class="pull-left">Week 4</span> <span class="pull-right">25/01/16 - 01/02/16</span></a>
+						</li>
+					</ul>
+				</div>
+				<div ng-show="timeTableDetails" class="timeTableView">
+					<div class="app-header"><span class="back-btn" ng-click="backTimetableList()"></span>Time Table</div>
+					<ul class="timeTableRow heading">
+						<li>Time</li>
+						<li>Mon</li>
+						<li>Tue</li>
+						<li>Wed</li>
+						<li>Thu</li>
+						<li>Fri</li>
+					</ul>
+					<ul class="timeTableRow">
+						<li class="timig">10am</li>
+						<li class="active" ng-click="mapGen1()">Maths Soctland building room 101</li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<ul class="timeTableRow">
+						<li class="timig">11am</li>
+						<li></li>
+						<li class="active" ng-click="mapGen1()">English Ireland building room 203</li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<ul class="timeTableRow">
+						<li class="timig">12pm</li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<ul class="timeTableRow">
+						<li class="timig">2pm</li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+				<form ng-show="classListScreen" class="form-horizontal">
+					<div class="app-header"><span class="back-btn" ng-click="homeScreen()"></span>Classes</div>
+					<div class="col-md-12 flw">
+						<div class="form-group">
+							<div class="col-sm-12">
+							  <select class="form-control">
+								<option>Choose school</option>
+								<option>school A</option>
+								<option>school B</option>
+								<option>school C</option>
+							  </select>
+							</div>
+						</div>
+					  <div class="form-group">
+						<div class="col-sm-12">
+						  <select class="form-control">
+							<option>Select Year</option>
+							<option>2016</option>
+							<option>2017</option>
+							<option>2018</option>
+						  </select>
+						</div>
+					  </div>
+						  <div class="form-group">
+							<div class="col-sm-12">
+							  <select ng-model="vlS" ng-change="generateClassList()" class="form-control">
+								<option value="s">Select Course</option>
+								<option>CSE</option>
+								<option>ECE</option>
+							  </select>
+							</div>
+						  </div>
+						  <div ng-show="generateClass">
+							<ul class="form-horizontal col-md-12 timeTableList">
+								<li>
+									<a href="#" ng-click="classDetails()">Class A</a>
+								</li>
+								<li>
+									<a href="#" ng-click="classDetails()">Class B</a>
+								</li>
+								<li>
+									<a href="#" ng-click="classDetails()">Class C</a>
+								</li>
+								<li>
+									<a href="#" ng-click="classDetails()">Class D</a>
+								</li>
+								<li>
+									<a href="#" ng-click="classDetails()">Class E</a>
+								</li>
+							</ul>
+						  </div>
+					</div>
+				</form>
+				<div ng-show="classDetailScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backClasList()"></span>Class Categories</div>
+					<ul class="form-horizontal col-md-12 timeTableList">
+						<li>
+							<a href="#" ng-click="studentList()">Students</a>
+						</li>
+						<li>
+							<a href="#" ng-click="teachersList()">Teachers</a>
+						</li>
+						<li>
+							<a href="#" ng-click="projectsList()">Projects</a>
+						</li>
+						<li>
+							<a href="#" ng-click="examsList()">Exams</a>
+						</li>
+						<li>
+							<a href="#" ng-click="classDetailList()">Class Details</a>
+						</li>
+					</ul>
+				</div>
+				<div ng-show="studentListScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backClassCategory()"></span>Student List</div>
+					<ul class="form-horizontal col-md-12 timeTableList">
+						<li>
+							<a href="#" ng-click="studentChats()"><span class="pull-left">Adam Atherton</span> <span class="pull-right"><img src="images/chat.png"</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="studentChats()"><span class="pull-left">John michel</span> <span class="pull-right"><img src="images/chat.png"</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="studentChats()"><span class="pull-left">Mark klerk</span> <span class="pull-right"><img src="images/chat.png"</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="studentChats()"><span class="pull-left">Billy Bob</span> <span class="pull-right"><img src="images/chat.png"</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="studentChats()"><span class="pull-left">Charles Conlen</span> <span class="pull-right"><img src="images/chat.png"</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="studentChats()"><span class="pull-left">Zach Zeus</span> <span class="pull-right"><img src="images/chat.png"</span></a>
+						</li>
+					</ul>
+				</div>
+				<div ng-show="studentChatScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backStudentList()"></span>Chat</div>
+					<div class="student-chat">
+						<div class="chat-coversation">
+							<span class="left-chat">Hii</span>
+							<span class="right-chat">Hello</span>
+						</div>
+						<div class="inputs-chat"><input type="text" name="chat"/><button>Send</button></div>
+					</div>
+				</div>
+				<div ng-show="teachersScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backClassCategory()"></span>Teachers Details</div>
+					<div class="col-md-12">
+						<ul class="list-group">
+						  <li class="list-group-item">Professor : Hercules</li>
+						  <li class="list-group-item"><a href="#" ng-click="mapGen2()">Building A , Room 3</a></li>
+						  <li class="list-group-item">Phone : 12534</li>
+						  <li class="list-group-item"><a href="mailto:herc@email.com">Email : herc@email.com</a></li>
+						</ul>
+						<ul class="list-group">
+						  <li class="list-group-item">Professor : Mark</li>
+						  <li class="list-group-item"><a href="#" ng-click="mapGen2()">Building C , Room 1</a></li>
+						  <li class="list-group-item">Phone : 5543</li>
+						  <li class="list-group-item"><a href="mailto:herc@email.com">Email : mark@email.com</a></li>
+						</ul>
+						<ul class="list-group">
+						  <li class="list-group-item">Professor : John</li>
+						  <li class="list-group-item"><a href="#" ng-click="mapGen2()">Building F , Room 2</a></li>
+						  <li class="list-group-item">Phone : 65434</li>
+						  <li class="list-group-item"><a href="mailto:herc@email.com">Email : john@email.com</a></li>
+						</ul>
+					</div>
+				</div>
+				<div ng-show="projectListScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backClassCategory()"></span>Projects</div>
+					<div class="col-md-12">
+						<div class="list-group">
+						  <a href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">Eassy on Drugs</h4>
+							<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						  </a>
+						</div>
+						<div class="list-group">
+							<a href="#" class="list-group-item disabled">
+								Group Project
+							</a>
+							<a href="#" class="list-group-item">See Group</a>
+						</div>
+					</div>
+				</div>
+				<div ng-show="examScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backClassCategory()"></span>Exams</div>
+					<div class="list-group">
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">Computer Science</h4>
+						<p class="list-group-item-text">Date: 17/04/2016</p>
+						<p class="list-group-item-text">Time: 09:00 AM</p>
+						<p class="list-group-item-text" ng-click="mapGen3()">Venue : block 2</p>
+					  </a>
+					</div>
+				</div>
+				<div ng-show="classDetailDataScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backClassCategory()"></span>Class Details</div>
+					<div class="list-group">
+					  <a href="#" class="list-group-item">
+						<p class="list-group-item-text">Date: Monday - 11/04/2016</p>
+						<p class="list-group-item-text">Time: 09:00 AM</p>
+						<p class="list-group-item-text">Venue : block C</p>
+					  </a>
+					</div>
+					<div class="list-group">
+					  <a href="#" class="list-group-item">
+						<p class="list-group-item-text">Date: Wednesday - 13/04/2016</p>
+						<p class="list-group-item-text">Time: 09:00 AM</p>
+						<p class="list-group-item-text">Venue : block F</p>
+					  </a>
+					</div>
+				</div>
+				<div ng-show="resultScreen">
+					<div class="app-header"><span class="back-btn" ng-click="homeScreen()"></span>Results</div>
+					<ul class="form-horizontal col-md-12 timeTableList">
+						<li>
+							<a href="#" ng-click="resultDetails()"><span class="pull-left">Maths</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="resultDetails()"><span class="pull-left">Computer Science</span></a>
+						</li>
+						<li>
+							<a href="#" ng-click="resultDetails()"><span class="pull-left">Business Management</span> </a>
+						</li>
+					</ul>
+				</div>
+				<div ng-show="resultDetailScreen">
+					<div class="app-header"><span class="back-btn" ng-click="backResults()"></span>Result Detail</div>
+					<ul class="form-horizontal col-md-12 timeTableList">
+						<li>
+							<a href="#"><span class="pull-left">Eassy</span></a>
+						</li>
+						<li>
+							<a href="#"><span class="pull-left">Group Project</span></a>
+						</li>
+						<li>
+							<a href="#"><span class="pull-left">Exam</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div ng-show="mapScreen" class="mapsc">
+			<div class="app-header head-fixed"><span class="home-btn" ng-click="homeScreen()"></span>Result Detail</div>
+			<div id="googleMap" style="width:100%;height:100%;"></div>
+		</div>
+	</div>
+	<script src="js/angular.min.js"></script>
+	<script src="js/script.js"></script>
+  </body>
+</html>

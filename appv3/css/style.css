@@ -1,0 +1,176 @@
+.marginTop30 {
+	margin-top: 30px;
+}
+ul {
+	padding: 0;
+}
+.timeTableList {
+	list-style: none;
+	float: left;
+	width: 100%;
+}
+.timeTableList li {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+.timeTableList a {
+	color: #3C3C3C;
+    padding: 15px 10px;
+    background: #E8E8E8;
+    float: left;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+.timeTableView {
+	float: left;
+	width: 100%;
+}
+.timeTableRow {
+	padding: 0;
+    list-style: none;
+    float: left;
+    font-size: 14px;
+    width: 100%;
+    border-bottom: 1px solid #000;
+	margin-bottom: 0;
+}
+.timeTableRow li {
+	float: left;
+    width: 16.6%;
+    border-right: 1px solid #000;
+    text-align: center;
+    padding: 10px 5px;
+	height: 100px;
+}
+.timeTableRow li:last-child {
+	border: 0;
+}
+.heading li {
+	height: auto;
+    font-weight: bold;
+}
+.timig {
+	line-height: 80px;
+    font-weight: bold;
+}
+.timeTableRow .active {
+	font-size: 10px;
+	background: #337ab7;
+    color: #fff;
+    text-align: left;
+}
+.timeTableRow .active a {
+	color: #fff;
+}
+.btn-success {
+	width: 100%;
+}
+.app-header {
+	float: left;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	margin-bottom: 20px;
+	background: #2672af;
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
+}
+.back-btn {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	height: 30px;
+	width: 30px;
+	cursor: pointer;
+	background: url(../images/back.png);
+}
+.flw, .mapScreen {
+	float: left;
+	width: 100%;
+}
+.progress {
+	margin-top: 60px;
+    width: 80%;
+    height: auto;
+}
+.mapScreen img {
+	width: 100%;
+	height: auto;
+}
+.home-btn {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	height: 30px;
+	width: 30px;
+	cursor: pointer;
+	background: url(../images/home.png);
+}
+.student-chat {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 300px;
+	width: 100%;
+}
+.chat-coversation {
+	position: absolute;
+	bottom: 50px;
+	left: 0;
+	height: 90px;
+	width: 100%;
+}
+.left-chat {
+	float: left;
+	width: 100%;
+	text-align: left;
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+}
+.right-chat {
+	float: left;
+	width: 100%;
+	text-align: right;
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+}
+.inputs-chat {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 50px;
+	width: 100%;
+}
+.inputs-chat input {
+	float: left;
+	width: 80%;
+	border: 1px solid #ccc;
+	boder-radius: 0;
+	height: 30px;
+}
+.inputs-chat button {
+	float: left;
+	width: 20%;
+	border: 0;
+	boder-radius: 0;
+	height: 30px;
+	background: #2672af;
+	color: #fff;
+}
+.list-group {
+    float: left;
+    width: 100%;
+}
+.head-fixed {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+html, body, .container, .mapsc {
+	height: 100%;
+}
